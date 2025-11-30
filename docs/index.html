@@ -107,21 +107,22 @@
 <div class="mermaid">
 flowchart TD
 
-    A[Streamlit UI<br>(text or voice)] -->|HTTP Request| B(API Gateway)
+    A["Streamlit UI\n(text or voice)"] -->|HTTP Request| B["API Gateway"]
 
-    B --> C[Lambda Frontend<br>Transcription + Bedrock Agent Call]
+    B --> C["Lambda Frontend\n(Transcription + Bedrock Agent Call)"]
 
-    C -->|Invoke Agent| D(Bedrock Agent)
+    C -->|Invoke Agent| D["Bedrock Agent"]
 
-    D -->|Backend Action| E[Lambda Backend<br>Quickbase Queries<br>Formatting<br>Exports]
+    D -->|Backend Action| E["Lambda Backend\n(Quickbase Queries, Formatting, Exports)"]
 
-    E --> F[Quickbase API]
-    E --> G[S3 Bucket<br>Exports + Attachments]
-    E --> H[Slack Notification]
+    E --> F["Quickbase API"]
+    E --> G["S3 Bucket\n(Exports + Attachments)"]
+    E --> H["Slack Notification"]
 
     E -->|Response Payload| C
     C -->|Response| A
 </div>
+
 
     <h2>⚙️ System Components</h2>
 
