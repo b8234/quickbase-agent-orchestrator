@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quickbase Agent Orchestrator</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Mermaid (Architecture Diagrams) -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true });</script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            background: #fafafa;
+            color: #222;
+            line-height: 1.6;
+        }
+        header {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        h2 {
+            margin-top: 40px;
+            font-size: 1.8rem;
+            color: #111827;
+        }
+        h3 {
+            margin-top: 25px;
+            font-size: 1.3rem;
+            color: #1f2937;
+        }
+        .code-block {
+            background: #1e1e1e;
+            color: #dcdcdc;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            background: #111827;
+            color: white;
+            font-size: 0.9rem;
+        }
+        a {
+            color: #2563eb;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Quickbase Agent Orchestrator</h1>
+    <p>Serverless, Multi-Stage AI Orchestration System for Conversational Access to Quickbase Data</p>
+</header>
+
+<div class="container">
+
+    <h2>🚀 Overview</h2>
+    <p>
+        The <strong>Quickbase Agent Orchestrator</strong> is a distributed AI workflow system that enables users to 
+        query, summarize, and export Quickbase data using natural language or voice.
+        It combines Amazon Bedrock, AWS Lambda, API Gateway, S3, Transcribe, Slack, and Streamlit to create an end-to-end,
+        enterprise-ready orchestration pipeline.
+    </p>
+
+    <h2>🧠 What This Project Demonstrates</h2>
+    <ul>
+        <li><strong>Distributed workflow orchestration</strong> using multiple AWS services</li>
+        <li><strong>AI-driven reasoning</strong> via Amazon Bedrock Agents</li>
+        <li><strong>Voice + text multimodal input</strong> using Transcribe + Streamlit</li>
+        <li><strong>Secure Quickbase access</strong> with a field allowlist governance layer</li>
+        <li><strong>Enterprise workflow patterns</strong> including exports, Slack alerts, and validation</li>
+    </ul>
+
+    <h2>🏗️ Architecture Diagram</h2>
+
+<div class="mermaid">
+flowchart TD
+
+    A[Streamlit UI<br>(text or voice)] -->|HTTP Request| B(API Gateway)
+
+    B --> C[Lambda Frontend<br>Transcription + Bedrock Agent Call]
+
+    C -->|Invoke Agent| D(Bedrock Agent)
+
+    D -->|Backend Action| E[Lambda Backend<br>Quickbase Queries<br>Formatting<br>Exports]
+
+    E --> F[Quickbase API]
+    E --> G[S3 Bucket<br>Exports + Attachments]
+    E --> H[Slack Notification]
+
+    E -->|Response Payload| C
+    C -->|Response| A
+</div>
+
+    <h2>⚙️ System Components</h2>
+
+    <h3>Streamlit Frontend</h3>
+    <ul>
+        <li>Supports both voice and text input</li>
+        <li>Displays responses, tables, and export links</li>
+        <li>Communicates with backend via API Gateway</li>
+    </ul>
+
+    <h3>Lambda Frontend</h3>
+    <ul>
+        <li>Handles HTTP requests from the UI</li>
+        <li>Transcribes audio using Amazon Transcribe</li>
+        <li>Invokes Bedrock Agent</li>
+    </ul>
+
+    <h3>Bedrock Agent</h3>
+    <ul>
+        <li>Routes user intent to backend Lambda via action groups</li>
+        <li>Coordinates multi-step reasoning</li>
+    </ul>
+
+    <h3>Lambda Backend</h3>
+    <ul>
+        <li>Queries Quickbase records</li>
+        <li>Enforces field allowlist governance</li>
+        <li>Formats and summarizes data</li>
+        <li>Exports CSV/JSON files to S3</li>
+        <li>Sends Slack notifications</li>
+    </ul>
+
+    <h2>📁 Project Structure</h2>
+    <div class="code-block">
+📦 quickbase-agent-orchestrator  
+├── streamlit/              # UI for text/voice interaction  
+├── lambda/
+│   ├── frontend/           # Transcription + Bedrock agent invocation
+│   └── backend/            # Quickbase queries, exports, Slack  
+├── src/                    # Shared backend modules  
+│   ├── quickbase_client.py  
+│   ├── exporters.py  
+│   ├── slack_client.py  
+│   ├── allowlist.py  
+│   └── utils.py  
+├── docs/  
+│   ├── index.html          # GitHub Pages site  
+│   └── architecture.md  
+└── example.env  
+    </div>
+
+    <h2>🔐 Governance Layer</h2>
+    <p>
+        A <strong>field allowlist</strong> restricts which tables and fields the AI system can access, ensuring 
+        safe and compliant operation in enterprise environments.
+    </p>
+
+    <h2>🧪 Demo Mode</h2>
+    <p>Set <code>DEMO_MODE=true</code> in <strong>.env</strong> to run the frontend without AWS or Quickbase costs.</p>
+
+    <h2>🏁 Use This Project To:</h2>
+    <ul>
+        <li>Build conversational interfaces for enterprise data</li>
+        <li>Understand multi-stage serverless workflow orchestration</li>
+        <li>Prototype AI-driven internal tools</li>
+        <li>Demonstrate system design patterns in interviews</li>
+    </ul>
+
+</div>
+
+<footer>
+    Built by Bryant Itonyo — Distributed Systems & AI Architect  
+    <br>
+    <a href="https://github.com/b8234">GitHub</a> • <a href="YOUR_LINKEDIN_URL">LinkedIn</a>
+</footer>
+
+</body>
+</html>
