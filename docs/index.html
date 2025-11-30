@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quickbase Agent Orchestrator</title>
 
-    <!-- Google Fonts -->
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Mermaid (Architecture Diagrams) -->
+    <!-- Mermaid -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
@@ -21,8 +21,9 @@
             margin: 0;
             font-family: "Inter", sans-serif;
             background: #fafafa;
-            color: #222;
+            color: #111;
             line-height: 1.6;
+            padding-bottom: 40px;
         }
         header {
             background: #111827;
@@ -32,13 +33,7 @@
         }
         header h1 {
             margin: 0;
-            font-size: 2.4rem;
-            font-weight: 700;
-        }
-        header p {
-            margin-top: 10px;
-            font-size: 1.1rem;
-            opacity: 0.8;
+            font-size: 2.2rem;
         }
         .container {
             max-width: 900px;
@@ -46,36 +41,18 @@
             padding: 0 20px;
         }
         h2 {
-            margin-top: 40px;
-            font-size: 1.8rem;
-            color: #111827;
-        }
-        h3 {
-            margin-top: 25px;
-            font-size: 1.3rem;
-            color: #1f2937;
-        }
-        .code-block {
-            background: #1e1e1e;
-            color: #dcdcdc;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: monospace;
-            white-space: pre-wrap;
-            overflow-x: auto;
-            margin-top: 10px;
-            font-size: 0.9rem;
+            font-size: 1.5rem;
+            margin-top: 30px;
         }
         footer {
             text-align: center;
-            padding: 30px;
-            margin-top: 40px;
+            padding: 25px;
             background: #111827;
             color: white;
-            font-size: 0.9rem;
+            margin-top: 50px;
         }
         a {
-            color: #2563eb;
+            color: #60a5fa;
         }
     </style>
 </head>
@@ -84,45 +61,40 @@
 
 <header>
     <h1>Quickbase Agent Orchestrator</h1>
-    <p>Serverless, Multi-Stage AI Orchestration System for Conversational Access to Quickbase Data</p>
+    <p>Serverless AI workflow enabling conversational access to Quickbase data</p>
 </header>
 
 <div class="container">
 
-    <h2>🚀 Overview</h2>
+    <h2>Overview</h2>
     <p>
-        The <strong>Quickbase Agent Orchestrator</strong> is a distributed AI workflow system that enables users to 
-        query, summarize, and export Quickbase data using natural language or voice.
-        It combines Amazon Bedrock, AWS Lambda, API Gateway, S3, Transcribe, Slack, and Streamlit to create an end-to-end,
-        enterprise-ready orchestration pipeline.
+        A lightweight reference architecture demonstrating how to combine Amazon Bedrock, AWS Lambda, API Gateway,
+        S3, Transcribe, and Quickbase to build a distributed, event-driven, conversational workflow system.
     </p>
 
-    <h2>🧠 What This Project Demonstrates</h2>
-    <ul>
-        <li><strong>Distributed workflow orchestration</strong> using multiple AWS services</li>
-        <li><strong>AI-driven reasoning</strong> via Amazon Bedrock Agents</li>
-        <li><strong>Voice + text multimodal input</strong> using Transcribe + Streamlit</li>
-        <li><strong>Secure Quickbase access</strong> with a field allowlist governance layer</li>
-        <li><strong>Enterprise workflow patterns</strong> including exports, Slack alerts, and validation</li>
-    </ul>
-
-    <h2>🏗️ Architecture Diagram</h2>
+    <h2>Architecture Diagram</h2>
 
 <div class="mermaid">
 flowchart TD
 
     A["Streamlit UI\n(text or voice)"] -->|HTTP Request| B["API Gateway"]
-
-    B --> C["Lambda Frontend\n(Transcription + Bedrock Agent Call)"]
-
+    B --> C["Lambda Frontend\n(Transcribe + Bedrock Agent)"]
     C -->|Invoke Agent| D["Bedrock Agent"]
-
-    D -->|Backend Action| E["Lambda Backend\n(Quickbase Queries, Formatting, Exports)"]
+    D -->|Backend Action| E["Lambda Backend\n(Quickbase Query + Export)"]
 
     E --> F["Quickbase API"]
-    E --> G["S3 Bucket\n(Exports + Attachments)"]
+    E --> G["S3 (Exports + Attachments)"]
     E --> H["Slack Notification"]
 
     E -->|Response Payload| C
     C -->|Response| A
 </div>
+
+</div>
+
+<footer>
+    Built by Bryant Itonyo — <a href="https://github.com/b8234">GitHub</a> • <a href="YOUR_LINKEDIN_URL">LinkedIn</a>
+</footer>
+
+</body>
+</html>
