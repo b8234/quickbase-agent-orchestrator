@@ -10,7 +10,11 @@
 
     <!-- Mermaid (Architecture Diagrams) -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({ startOnLoad: true });</script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          mermaid.initialize({ startOnLoad: true });
+      });
+    </script>
 
     <style>
         body {
@@ -122,82 +126,3 @@ flowchart TD
     E -->|Response Payload| C
     C -->|Response| A
 </div>
-
-
-    <h2>⚙️ System Components</h2>
-
-    <h3>Streamlit Frontend</h3>
-    <ul>
-        <li>Supports both voice and text input</li>
-        <li>Displays responses, tables, and export links</li>
-        <li>Communicates with backend via API Gateway</li>
-    </ul>
-
-    <h3>Lambda Frontend</h3>
-    <ul>
-        <li>Handles HTTP requests from the UI</li>
-        <li>Transcribes audio using Amazon Transcribe</li>
-        <li>Invokes Bedrock Agent</li>
-    </ul>
-
-    <h3>Bedrock Agent</h3>
-    <ul>
-        <li>Routes user intent to backend Lambda via action groups</li>
-        <li>Coordinates multi-step reasoning</li>
-    </ul>
-
-    <h3>Lambda Backend</h3>
-    <ul>
-        <li>Queries Quickbase records</li>
-        <li>Enforces field allowlist governance</li>
-        <li>Formats and summarizes data</li>
-        <li>Exports CSV/JSON files to S3</li>
-        <li>Sends Slack notifications</li>
-    </ul>
-
-    <h2>📁 Project Structure</h2>
-    <div class="code-block">
-📦 quickbase-agent-orchestrator  
-├── streamlit/              # UI for text/voice interaction  
-├── lambda/
-│   ├── frontend/           # Transcription + Bedrock agent invocation
-│   └── backend/            # Quickbase queries, exports, Slack  
-├── src/                    # Shared backend modules  
-│   ├── quickbase_client.py  
-│   ├── exporters.py  
-│   ├── slack_client.py  
-│   ├── allowlist.py  
-│   └── utils.py  
-├── docs/  
-│   ├── index.html          
-│   └── DEMO_MODE_GUIDE.md  
-└── example.env  
-    </div>
-
-    <h2>🔐 Governance Layer</h2>
-    <p>
-        A <strong>field allowlist</strong> restricts which tables and fields the AI system can access, ensuring 
-        safe and compliant operation in enterprise environments.
-    </p>
-
-    <h2>🧪 Demo Mode</h2>
-    <p>Set <code>DEMO_MODE=true</code> in <strong>.env</strong> to run the frontend without AWS or Quickbase costs.</p>
-
-    <h2>🏁 Use This Project To:</h2>
-    <ul>
-        <li>Build conversational interfaces for enterprise data</li>
-        <li>Understand multi-stage serverless workflow orchestration</li>
-        <li>Prototype AI-driven internal tools</li>
-        <li>Demonstrate system design patterns in interviews</li>
-    </ul>
-
-</div>
-
-<footer>
-    Built by Bryant Itonyo — Distributed Systems & AI Architect  
-    <br>
-    <a href="https://github.com/b8234">GitHub</a> • <a href="YOUR_LINKEDIN_URL">LinkedIn</a>
-</footer>
-
-</body>
-</html>
